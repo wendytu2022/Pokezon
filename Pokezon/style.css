@@ -9,12 +9,13 @@
     margin-right: auto;
 }
 
+
 h1 {
     font-family: pokemon;
 }
 
 html {
-
+    background-image: url('background.png');
 }
 
 h2 {
