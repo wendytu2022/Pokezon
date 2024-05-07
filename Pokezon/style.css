@@ -3,10 +3,15 @@
     src: url(Pokemon-Solid.ttf);
 }
 
+<<<<<<< HEAD
 html {
 
 }
 
 h2 {
 
+=======
+h1 {
+    font-family: pokemon;
+>>>>>>> b1746c63b2f044b92af204d73ea11bdc493a26f1
 }
