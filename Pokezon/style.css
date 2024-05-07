@@ -2,3 +2,7 @@
     font-family: pokemon;
     src: url(Pokemon-Solid.ttf);
 }
+
+h1 {
+    font-family: pokemon;
+}

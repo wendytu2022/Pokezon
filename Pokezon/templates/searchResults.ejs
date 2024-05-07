@@ -7,9 +7,27 @@
     <title>Pokezon Search Result</title>
 </head>
 <body>
-    <h1>1 result for "<%- table %>"</h1>
+    <!-- NAV BAR -->
+    <ul>
+        <li><a href="index.ejs">Home</a></li>
+        <li><a href="history.ejs">History</a></li>
+    </ul>
+
+    <h1>Pokezon Search Results</h1>
+
+    <h2>1 result for "<%- table %>"</h2>
     <hr>
-    <h3>Result</h3>
+    <div>
+        <h3>Result</h3>
+        <hr>
+        <h3><%- name %></h3>
+        <%- image> <!-- image-->
+        <h3>Product Details</h3>
+        <%- properties>
+    </div>
+
+    <hr>
+    
     
 </body>
 </html>
