@@ -9,17 +9,20 @@
 </head>
 <body>
     <!-- NAV BAR -->
-    <ul id="nav-bar">
-        <li><a href="index.ejs">Home</a></li>
-        <li><a href="history.ejs">History</a></li>
-        <li><a href="cart.ejs">Cart</a></li>
-    </ul>
+    <div id="nav-bar-background">
+        <h1>Pokezon</h1>
+        <ul id="nav-bar">
+            <li class="nav-bar-element"><a href="index.ejs">Home</a></li>
+            <li class="nav-bar-element"><a href="history.ejs">History</a></li>
+            <li class="nav-bar-element"><a href="cart.ejs">Cart</a></li>
+        </ul>
+    </div>
+    
 
-    <h1>Pokezon</h1>
     <div id = "grey">
     <h2>Welcome to Pokezon!</h2>
 
-    <h3>Search for your next Pokemon: </h3><br>
+    <h3 id="index-subheading">Search for your next Pokemon: </h3><br>
     <form action="/results" method="post">
         <input type="text" id="pokemonSearchBar" name="pokemonName" value="Pikachu">
         <input type="submit" id="submitButton" name="submitButton" value="Search"><br>

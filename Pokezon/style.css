@@ -12,6 +12,8 @@
 
 h1 {
     font-family: pokemon;
+    display: inline;
+    margin: 2rem;
 }
 
 body {
@@ -29,6 +31,31 @@ h2 {
     border-style: outset;
     padding-left: 2rem;
     padding-bottom: 2rem;
+}
+
+#nav-bar {
+    list-style-type: none;
+    margin-left: 5rem;
+    padding: 5rem;
+    display: inline;
+}
+
+.nav-bar-element {
+    display: inline;
+    padding: 1rem;
+    background-color: lightpink;
+}
+
+.nav-bar-element:hover {
+    display: inline;
+    padding: 1rem;
+    background-color: rgb(240, 82, 106);
+}
+
+
+
+#nav-bar-background {
+    background-color: lightpink;
 }
 
 #pokemonSearchBar {
