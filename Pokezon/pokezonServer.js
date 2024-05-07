@@ -21,6 +21,11 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const databaseAndCollection = { db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION };
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+/* ORDER PAGE */
+app.get("/order", async (request, response) => {
+    response.render("searchResults", variables);
+});
+
 /* CART */
 app.get("/cart", async (request, response) => {
 
@@ -31,10 +36,24 @@ app.get("/cart", async (request, response) => {
             .collection(databaseAndCollection.collection)
             .toArray();
 
-        let list = `<li>Pikachu</li>`;
+        let cartItems = result.map(pokemon => {
+            return `<tr><td>${pokemon.name}</td><td>${pokemon.weight}</td></tr>`;
+        }).join('');
+
+        let tableHTML = `<table border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th><th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>${cartItems}</tr>
+                                </tbody>
+                            </table>
+                            <br>`;
 
         const variables = {
-            list: list
+            html: tableHTML
         };
 
         response.render("cart", variables);
