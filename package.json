@@ -1,0 +1,15 @@
+{
+  "name": "pokezon",
+  "version": "1.0.0",
+  "description": "Amazon, but for Pokemon!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Pokezon"
+  },
+  "author": "Wendy Tu, Mabel Hong, Amber Chen",
+  "license": "ISC"
+}
