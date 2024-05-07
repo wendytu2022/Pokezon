@@ -15,15 +15,20 @@
 
     <h1>Pokezon Search Results</h1>
 
-    <h2>1 result for "<%- table %>"</h2>
+    <h2>1 result for "<%- name %>"</h2>
     <hr>
     <div>
         <h3>Result</h3>
         <hr>
         <h3><%- name %></h3>
         <%- image> <!-- image-->
+        <h3>Price: <%- price></h3>
+        <form action="/cart.ejs" method="post">
+            <input type="submit" value="Add to Cart"/>
+        </form>
         <h3>Product Details</h3>
         <%- properties>
+
     </div>
 
     <hr>
