@@ -20,11 +20,11 @@
     <h2>Welcome to Pokezon!</h2>
 
     <h3>Search for your next Pokemon: </h3><br>
-    <form action="link here" method="post">
+    <form action="/results" method="post">
         <input type="text" id="pokemonSearchBar" name="pokemonName" value="Pikachu">
-        <input type="submit" id="submitButton" name="submitButton"><br>
-        <input type="checkbox" id="checkbox" name="normal"> <label for="normal">Normal</label>
-        <input type="checkbox" id="checkbox" name="shiny"> <label for="shiny">Shiny</label>
+        <input type="submit" id="submitButton" name="submitButton" value="Search"><br>
+        <input type="radio" id="normal" name="color" checked> <label for="normal">Normal</label>
+        <input type="radio" id="shiny" name="color"> <label for="shiny">Shiny</label>
     </form>
 
     <hr>

@@ -21,8 +21,17 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const databaseAndCollection = { db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION };
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-/* ORDER PAGE */
-app.get("/order", async (request, response) => {
+/* RESULTS PAGE */
+app.post("/results", async (request, response) => {
+
+    const { pokemonName, color } = request.body;
+
+    // Check which radio box is selected
+    let isShiny = false;
+    if (color === "shiny") {
+        isShiny = true;
+    }
+
     response.render("searchResults", variables);
 });
 
