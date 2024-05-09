@@ -2,7 +2,9 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
-const portNumber = process.env.PORT;
+//const portNumber = process.env.PORT;
+const portNumber = 4000;
+import fetch from "node-fetch";
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -22,6 +24,32 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const databaseAndCollection = { db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION };
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+app.post("/results", async (request, response) => {
+
+    let pokemonName  = request.body.pokemonName;
+    pokemonName = pokemonName.toLowerCase();
+
+    try {
+
+        const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+        const pokemonData = await apiResponse.json();
+
+        let pokemon = {
+            name: pokemonData.name,
+            image: pokemonData.sprites.front_default,
+            price: pokemonData.weight,
+            properties: pokemonData.abilities[0].ability
+        }
+
+        response.render("searchResults", pokemon);
+
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+});
+
 /* CART */
 app.get("/cart", async (request, response) => {
 
@@ -30,13 +58,14 @@ app.get("/cart", async (request, response) => {
 
         const result = await client.db(databaseAndCollection.db)
             .collection(databaseAndCollection.collection)
+            .find()
             .toArray();
 
         let items = result.map(pokemon => {
             return `<tr><td>${pokemon.name}</td><td>${pokemon.weight}</td></tr>`;
         }).join('');
 
-        let cart = `<table>
+        let cart = `<table border="1">
                         <thead>
                             <tr>
                                 <th>Item</th><th>Price</th>

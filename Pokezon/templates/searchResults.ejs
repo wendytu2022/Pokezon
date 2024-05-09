@@ -11,7 +11,7 @@
     <div id="nav-bar-background">
         <h1>Pokezon</h1>
         <ul id="nav-bar">
-            <li class="nav-bar-element"><a href="index">Home</a></li>
+            <li class="nav-bar-element"><a href="/">Home</a></li>
             <li class="nav-bar-element"><a href="history">History</a></li>
             <li class="nav-bar-element"><a href="cart">Cart</a></li>
         </ul>
@@ -26,13 +26,13 @@
             <h3>Result</h3>
             <hr>
             <h3><%- name %></h3>
-            <%- image> <!-- image-->
-            <h3>Price: <%- price></h3>
+            <%- image > <!-- image-->
+            <h3>Price: <%- price ></h3>
             <form action="/cart" method="post">
                 <input type="submit" value="Add to Cart" id = "submitButton"/>
             </form>
             <h3>Product Details</h3>
-            <%- properties>
+            <%- properties >
 
         </div>
     </div>  
