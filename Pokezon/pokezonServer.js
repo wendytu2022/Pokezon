@@ -2,6 +2,7 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
+const portNumber =  process.env.PORT;
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -21,20 +22,6 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const databaseAndCollection = { db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION };
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-/* RESULTS PAGE */
-app.post("/results", async (request, response) => {
-
-    const { pokemonName, color } = request.body;
-
-    // Check which radio box is selected
-    let isShiny = false;
-    if (color === "shiny") {
-        isShiny = true;
-    }
-
-    response.render("searchResults", variables);
-});
-
 /* CART */
 app.get("/cart", async (request, response) => {
 
@@ -45,24 +32,10 @@ app.get("/cart", async (request, response) => {
             .collection(databaseAndCollection.collection)
             .toArray();
 
-        let cartItems = result.map(pokemon => {
-            return `<tr><td>${pokemon.name}</td><td>${pokemon.weight}</td></tr>`;
-        }).join('');
-
-        let tableHTML = `<table border="1">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th><th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>${cartItems}</tr>
-                                </tbody>
-                            </table>
-                            <br>`;
+        let list = `<li>Pikachu</li>`;
 
         const variables = {
-            html: tableHTML
+            list: list
         };
 
         response.render("cart", variables);
@@ -74,3 +47,27 @@ app.get("/cart", async (request, response) => {
     }
 });
 
+app.listen(portNumber);
+console.log(`Web server started and running at: http://localhost:${portNumber}`);
+const prompt = "Stop to shutdown the server: ";
+process.stdout.write(prompt);
+// Read input until exit
+process.stdin.on("readable", function() {
+    const input = process.stdin.read();
+    if (input !== null) {
+        const command = input.trim();
+
+        // if user entered "stop", exits
+        if (command === "stop") {
+            process.stdout.write("Shutting down the server");
+            process.exit(0);
+        }
+        // if user did not enter any of the above, tells them 
+        // that they gave an invalid command
+        else {
+            process.stdout.write(`Invalid command: ${command} \n`);
+        }
+        process.stdout.write(prompt);
+        process.stdin.resume();
+    }
+});
