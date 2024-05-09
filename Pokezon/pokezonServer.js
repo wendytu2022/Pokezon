@@ -2,7 +2,7 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
-const portNumber =  process.env.PORT;
+const portNumber = process.env.PORT;
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -32,10 +32,25 @@ app.get("/cart", async (request, response) => {
             .collection(databaseAndCollection.collection)
             .toArray();
 
-        let list = `<li>Pikachu</li>`;
+        let items = result.map(pokemon => {
+            return `<tr><td>${pokemon.name}</td><td>${pokemon.weight}</td></tr>`;
+        }).join('');
+
+        let cart = `<table>
+                        <thead>
+                            <tr>
+                                <th>Item</th><th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>${items}</tr>
+                        </tbody>
+                    </table>
+                    <br>`;
+
 
         const variables = {
-            list: list
+            html: cart
         };
 
         response.render("cart", variables);
@@ -52,7 +67,7 @@ console.log(`Web server started and running at: http://localhost:${portNumber}`)
 const prompt = "Stop to shutdown the server: ";
 process.stdout.write(prompt);
 // Read input until exit
-process.stdin.on("readable", function() {
+process.stdin.on("readable", function () {
     const input = process.stdin.read();
     if (input !== null) {
         const command = input.trim();

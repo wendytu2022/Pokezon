@@ -9,8 +9,8 @@
 <body>
     <!-- NAV BAR -->
     <ul>
-        <li><a href="index.ejs">Home</a></li>
-        <li><a href="history.ejs">History</a></li>
+        <li><a href="index">Home</a></li>
+        <li><a href="history">History</a></li>
     </ul>
 
     <h1>Pokezon Search Results</h1>
@@ -24,7 +24,7 @@
             <h3><%- name %></h3>
             <%- image> <!-- image-->
             <h3>Price: <%- price></h3>
-            <form action="/cart.ejs" method="post">
+            <form action="/cart" method="post">
                 <input type="submit" value="Add to Cart" id = "submitButton"/>
             </form>
             <h3>Product Details</h3>
