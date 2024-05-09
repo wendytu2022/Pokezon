@@ -2,8 +2,8 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
-//const portNumber = process.env.PORT;
-const portNumber = 4000;
+const portNumber = process.env.PORT;
+//const portNumber = 4000;
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -26,28 +26,33 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 app.post("/results", async (request, response) => {
 
     let pokemonName  = request.body.pokemonName;
+    let shiny = request.body.color;
     pokemonName = pokemonName.toLowerCase();
-    let color = request.body.color;
+    let pokemon;
 
     try {
 
         const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
         const pokemonData = await apiResponse.json();
 
-        // check if normal or shiny was selected
-        let image = pokemonData.sprites.front_default;
-        if (color == "shiny" && pokemonData.sprites.front_shiny != "null") {
-            image = pokemonData.sprites.front_shiny;
+        if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
+            pokemon = {
+                name: pokemonData.name,
+                image: pokemonData.sprites.front_shiny,
+                price: pokemonData.weight * 2,
+                properties: pokemonData.abilities[0].ability
+            }
+        }
+        else {
+            pokemon = {
+                name: pokemonData.name,
+                image: pokemonData.sprites.front_default,
+                price: pokemonData.weight,
+                properties: pokemonData.abilities[0].ability
+            }
         }
 
-        let variables = {
-            name: pokemonData.name,
-            image: image,
-            price: pokemonData.weight,
-            properties: pokemonData.abilities[0].ability
-        }
-
-        response.render("searchResults", variables);
+        response.render("searchResults", pokemon);
 
     } catch (e) {
         console.error(e);
