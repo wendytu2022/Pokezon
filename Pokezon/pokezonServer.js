@@ -27,18 +27,29 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 app.post("/results", async (request, response) => {
 
     let pokemonName  = request.body.pokemonName;
+    let shiny = request.body.color;
     pokemonName = pokemonName.toLowerCase();
+    let pokemon;
 
     try {
 
         const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
         const pokemonData = await apiResponse.json();
-
-        let pokemon = {
-            name: pokemonData.name,
-            image: pokemonData.sprites.front_default,
-            price: pokemonData.weight,
-            properties: pokemonData.abilities[0].ability
+        if (shiny === "shiny") {
+            pokemon = {
+                name: pokemonData.name,
+                image: pokemonData.sprites.shiny_default,
+                price: pokemonData.weight * 2,
+                properties: pokemonData.abilities[0].ability
+            }
+        }
+        else {
+            pokemon = {
+                name: pokemonData.name,
+                image: pokemonData.sprites.front_default,
+                price: pokemonData.weight,
+                properties: pokemonData.abilities[0].ability
+            }
         }
 
         response.render("searchResults", pokemon);
