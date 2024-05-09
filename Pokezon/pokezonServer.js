@@ -4,7 +4,6 @@ const express = require("express");
 const app = express();
 //const portNumber = process.env.PORT;
 const portNumber = 4000;
-import fetch from "node-fetch";
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -28,20 +27,27 @@ app.post("/results", async (request, response) => {
 
     let pokemonName  = request.body.pokemonName;
     pokemonName = pokemonName.toLowerCase();
+    let color = request.body.color;
 
     try {
 
         const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
         const pokemonData = await apiResponse.json();
 
-        let pokemon = {
+        // check if normal or shiny was selected
+        let image = pokemonData.sprites.front_default;
+        if (color == "shiny" && pokemonData.sprites.front_shiny != "null") {
+            image = pokemonData.sprites.front_shiny;
+        }
+
+        let variables = {
             name: pokemonData.name,
-            image: pokemonData.sprites.front_default,
+            image: image,
             price: pokemonData.weight,
             properties: pokemonData.abilities[0].ability
         }
 
-        response.render("searchResults", pokemon);
+        response.render("searchResults", variables);
 
     } catch (e) {
         console.error(e);
@@ -83,6 +89,33 @@ app.get("/cart", async (request, response) => {
         };
 
         response.render("cart", variables);
+
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+});
+
+/* add to cart */
+app.post("/cart", async (request, response) => {
+
+    let pokemonName  = request.body.pokemonName;
+    pokemonName = pokemonName.toLowerCase();
+
+    try {
+
+        const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+        const pokemonData = await apiResponse.json();
+
+        let pokemon = {
+            name: pokemonData.name,
+            image: pokemonData.sprites.front_default,
+            price: pokemonData.weight,
+            properties: pokemonData.abilities[0].ability
+        }
+
+        response.render("searchResults", pokemon);
 
     } catch (e) {
         console.error(e);
