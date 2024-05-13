@@ -2,8 +2,8 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
-//const portNumber = process.env.PORT;
-const portNumber = 4000;
+const portNumber = process.env.PORT;
+//const portNumber = 4000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -82,18 +82,28 @@ app.get("/cart", async (request, response) => {
             .toArray();
 
         let items = result.map(pokemon => {
-            return `<tr><td>${pokemon.name}</td><td>${pokemon.price}</td><td></td></tr>`;
+            return `<tr><td>${pokemon.name}</td><td>${pokemon.price}</td><td><img src=${pokemon.image} alt=${pokemon.name}></td></tr>`;
         }).join('');
+
+        let total = result.reduce((sum, pokemon) => {
+            return sum + parseInt(pokemon.price);
+        }, 0);
 
         let cart = `<table border="1">
                         <thead>
                             <tr>
-                                <th>Item</th><th>Price</th>
+                                <th>Item</th><th>Price</th><th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>${items}</tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total Cost: </td>
+                                <td>${total.toFixed(2)}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                     <br>`;
 
