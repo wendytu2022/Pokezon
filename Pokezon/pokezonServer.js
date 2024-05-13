@@ -2,8 +2,8 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
-const portNumber = process.env.PORT;
-//const portNumber = 4000;
+//const portNumber = process.env.PORT;
+const portNumber = 4000;
 
 //const __filename = fileURLToPath(import.meta.url);
 //const __dirname = path.dirname(__filename);
@@ -150,6 +150,31 @@ app.post("/cart", async (request, response) => {
     } finally {
         await client.close();
     }
+});
+
+app.post("/clear", async (request, response) => {
+
+    try {
+        await client.connect();
+
+        const cursor = await client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .find()
+            .toArray();
+        const count = cursor.length;
+
+        const result = await client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .deleteMany({});
+
+        response.redirect("cart");
+
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+
 });
 
 app.listen(portNumber);
