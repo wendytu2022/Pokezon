@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/styles'));
 
 /* INDEX PAGE */
 app.get("/", (request, response) => {
-    response.render("index");
+    response.render("index", { error: "" });
 });
 
 const bodyParser = require("body-parser");
@@ -44,8 +44,16 @@ app.post("/searchResults", async (request, response) => {
         console.log(pokemonData.abilities)
 
         properties = "<span>"
+<<<<<<< Updated upstream
         pokemonData.abilities.forEach(p => {if (p.ability.name) {
             properties += "<span id = \"ability\">" + p.ability.name + "</span>"}})
+=======
+        pokemonData.abilities.forEach(p => {
+            if (p.ability.name) {
+                properties += "<div id = \"ability\">" + p.ability.name + "<div>"
+            }
+        })
+>>>>>>> Stashed changes
         properties += "</span>"
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
@@ -69,6 +77,7 @@ app.post("/searchResults", async (request, response) => {
 
     } catch (e) {
         console.error(e);
+        response.render("index", { error: "Pokémon not found." });
     } finally {
         await client.close();
     }
@@ -139,10 +148,10 @@ app.post("/cart", async (request, response) => {
             name: pokemonName,
             image: image,
             price: price
-        }        
-        
+        }
+
         await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(pokemon);
-        
+
         response.redirect("cart")
 
     } catch (e) {
