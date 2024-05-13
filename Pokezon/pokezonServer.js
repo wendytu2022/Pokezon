@@ -43,7 +43,7 @@ app.post("/searchResults", async (request, response) => {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_shiny,
                 price: pokemonData.weight * 2,
-                properties: pokemonData.abilities[0].ability.name
+                properties: properties
             }
         }
         else {
@@ -51,7 +51,7 @@ app.post("/searchResults", async (request, response) => {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_default,
                 price: pokemonData.weight,
-                properties: pokemonData.abilities[0].ability
+                properties: properties
             }
         }
 
