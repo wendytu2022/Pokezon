@@ -1,11 +1,6 @@
 @font-face {
     font-family: pokemon;
-    src: url(/Pokezon/Pokemon-Solid.ttf);
-}
-
-@font-face {
-    font-family: header;
-    src: url(Pokezon/Rubik-VariableFont_wght.ttf);
+    src: url(Pokemon-Solid.ttf);
 }
 
 #center {
@@ -22,13 +17,7 @@ h1 {
 }
 
 body {
-    background-image: url('/Pokezon/background.png');
-}
-
-h2 {
-    font-family: header;
-    text-align: center;
-    font-size: 6rem;
+    background-image: url('background.png');
 }
 
 #grey {
@@ -36,7 +25,8 @@ h2 {
     border-color: palevioletred;
     border-width: 0.5em;
     border-style: outset;
-    padding:10rem;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
 }
 
 #nav-bar {
@@ -58,10 +48,7 @@ h2 {
     background-color: rgb(240, 82, 106);
 }
 
-#index-subheading {
-    font-size: 2rem;
-    text-align: center;
-}
+
 
 #nav-bar-background {
     background-color: lightpink;
@@ -74,14 +61,22 @@ h2 {
     border: 0.3rem solid lightblue;
 }
 
-#submitButton {
+input[type="submit"] {
     background-color: lightblue;
     border: 0.3rem solid lightblue;
     border-radius: 2rem;
     padding: 0.5rem;
 }
 
-#submitButton:hover {
+input[type="submit"]:hover {
     background-color: rgb(61, 176, 214);
     border: 0.3rem solid rgb(61, 176, 214);
+}
+
+#ability {
+    background-color: lightpink;
+    border: 0.3rem solid palevioletred;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
 }
