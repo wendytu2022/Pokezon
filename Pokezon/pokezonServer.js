@@ -42,8 +42,7 @@ app.post("/searchResults", async (request, response) => {
         let properties;
 
         console.log(pokemonData.abilities)
-        properties = types[0].type.name
-
+        properties = pokemonData.abilities[0].ability.name
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
                 name: pokemonData.name,
