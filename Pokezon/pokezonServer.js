@@ -156,6 +156,7 @@ app.post("/cart", async (request, response) => {
     }
 });
 
+// clear cart
 app.post("/clear", async (request, response) => {
 
     try {
@@ -181,6 +182,12 @@ app.post("/clear", async (request, response) => {
 
 });
 
+// continue shopping
+app.post("/shop", async (request, response) => {
+    response.redirect("/");
+});
+
+// checkout
 app.post("/checkout", async (request, response) => {
 
     try {
