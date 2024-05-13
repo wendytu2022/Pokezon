@@ -5,8 +5,8 @@ const app = express();
 //const portNumber = process.env.PORT;
 const portNumber = 4000;
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -42,13 +42,18 @@ app.post("/searchResults", async (request, response) => {
         let properties;
 
         console.log(pokemonData.abilities)
-        properties = pokemonData.abilities[0].ability.name
+
+        properties = "<span>"
+        pokemonData.abilities.forEach(p => {if (p.ability.name) {
+            properties += "<div id = \"ability\">" + p.ability.name + "<div>"}})
+        properties += "</span>"
+
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_shiny,
                 price: pokemonData.weight * 2,
-                properties: properties
+                properties: properties.substring(9).replace('-', ' ')
             }
         }
         else {
@@ -56,7 +61,7 @@ app.post("/searchResults", async (request, response) => {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_default,
                 price: pokemonData.weight,
-                properties: properties
+                properties: properties.substring(9).replace('-', ' ')
             }
         }
 
