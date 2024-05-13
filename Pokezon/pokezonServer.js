@@ -43,11 +43,10 @@ app.post("/searchResults", async (request, response) => {
 
         console.log(pokemonData.abilities)
 
-        pokemonData.abilities.forEach(p => {
-            if (p.ability.name) {
-                properties += "<div class = \"ability\">" + p.ability.name + "</div>"
-            }
-        })
+        properties = "<span>"
+        pokemonData.abilities.forEach(p => {if (p.ability.name) {
+            properties += `<span id = "ability">${p.ability.name}</span>`}})
+        properties += "</span>"
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
@@ -98,7 +97,7 @@ app.get("/cart", async (request, response) => {
         let cart = `<table border="1">
                         <thead>
                             <tr>
-                                <th>Item</th><th>Price</th>
+                                <th>Item</th><th>Price</th><th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -154,7 +153,6 @@ app.post("/cart", async (request, response) => {
     }
 });
 
-// clear cart
 app.post("/clear", async (request, response) => {
 
     try {
@@ -171,63 +169,6 @@ app.post("/clear", async (request, response) => {
             .deleteMany({});
 
         response.redirect("cart");
-
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-
-});
-
-// continue shopping
-app.post("/shop", async (request, response) => {
-    response.redirect("/");
-});
-
-// checkout
-app.post("/checkout", async (request, response) => {
-
-    try {
-        await client.connect();
-
-        // gets list of pokemon
-        const result = await client.db(databaseAndCollection.db)
-            .collection(databaseAndCollection.collection)
-            .find()
-            .toArray();
-
-        let items = result.map(pokemon => {
-            return `<tr><td>${pokemon.name}</td><td><img src=${pokemon.image} alt=${pokemon.name}></td></tr>`;
-        }).join('');
-
-        let cart = `<table border="1">
-                        <thead>
-                            <tr>
-                                <th>Pokemon</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>${items}</tr>
-                        </tbody>
-                    </table>
-                    <br>`;
-
-
-        const variables = {
-            html: cart
-        };
-
-        // clears cart
-        const cursor = await client.db(databaseAndCollection.db)
-            .collection(databaseAndCollection.collection)
-            .find()
-            .toArray();
-        const count = cursor.length;
-
-        await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).deleteMany({});
-
-        response.render("checkout", variables);
 
     } catch (e) {
         console.error(e);
