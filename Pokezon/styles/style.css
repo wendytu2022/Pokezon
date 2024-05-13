@@ -31,13 +31,22 @@ body {
     text-align: center;
 }
 
-#grey {
+#greyIndex {
     margin: 1rem;
     background-color: rgba(255, 255, 255, 0.7);
     border-color: palevioletred;
     border-width: 0.5em;
     border-style: outset;
     padding: 10rem;
+}
+
+#greyResults {
+    margin: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: palevioletred;
+    border-width: 0.5em;
+    border-style: outset;
+    padding: 2rem;
 }
 
 #nav-bar {
