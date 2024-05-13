@@ -3,6 +3,11 @@
     src: url(Pokemon-Solid.ttf);
 }
 
+@font-face {
+    font-family: header;
+    src: url(Rubik-VariableFont_wght.ttf);
+}
+
 #center {
     display: block;
     margin-left: auto;
@@ -16,6 +21,11 @@ h1 {
     margin: 2rem;
 }
 
+h2 {
+    font-family: header;
+    text-align: center;
+}
+
 body {
     background-image: url('background.png');
 }
@@ -25,8 +35,7 @@ body {
     border-color: palevioletred;
     border-width: 0.5em;
     border-style: outset;
-    padding-left: 2rem;
-    padding-bottom: 2rem;
+    padding: 10rem;
 }
 
 #nav-bar {
