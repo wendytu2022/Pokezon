@@ -45,7 +45,7 @@ app.post("/searchResults", async (request, response) => {
 
         properties = "<span>"
         pokemonData.abilities.forEach(p => {if (p.ability.name) {
-            properties += "<div id = \"ability\">" + p.ability.name + "<div>"}})
+            properties += "<span id = \"ability\">" + p.ability.name + "</span>"}})
         properties += "</span>"
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
