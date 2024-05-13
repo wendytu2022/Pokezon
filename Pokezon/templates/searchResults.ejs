@@ -31,8 +31,12 @@
                 <input type="hidden" name="pokemonName" value="<%- name %>">
                 <input type="hidden" name="image" value="<%- image %>">
                 <input type="hidden" name="price" value="<%- price %>">
-                <input type="submit" value="Add to Cart" id = "submitButton" name="submitButton"/>
+                <input type="submit" value="Add to Cart" id="submitButton" name="submitButton"/>
             </form>
+            <form action="/back" method="post">
+                <input type="submit" value="Back"/>
+            </form>
+
             <h3>Product Details</h3>
             <%- properties %>
 
