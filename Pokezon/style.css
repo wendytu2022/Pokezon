@@ -61,14 +61,14 @@ body {
     border: 0.3rem solid lightblue;
 }
 
-#submitButton {
+input[type="submit"] {
     background-color: lightblue;
     border: 0.3rem solid lightblue;
     border-radius: 2rem;
     padding: 0.5rem;
 }
 
-#submitButton:hover {
+input[type="submit"]:hover {
     background-color: rgb(61, 176, 214);
     border: 0.3rem solid rgb(61, 176, 214);
 }

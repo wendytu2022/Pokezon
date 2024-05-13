@@ -154,6 +154,11 @@ app.post("/cart", async (request, response) => {
     }
 });
 
+// back
+app.post("/back", async (request, response) => {
+    response.redirect("/");
+});
+
 // clear cart
 app.post("/clear", async (request, response) => {
 
