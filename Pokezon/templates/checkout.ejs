@@ -18,29 +18,12 @@
     </div>
     
     <div id = "grey">
-        <h2>Cart</h2>
+        <h1>Congrats!</h1>
+        <h2>You are now the proud owner of:</h2>
 
         <div>
             <%- html %>
         </div>
-
-        <form action="/clear" method="post">
-            <input type="submit" value="Clear cart" onclick="confirmRemove()">
-        </form>
-
-        <form action="/checkout" method="post">
-            <input type="submit" value="Checkout" onclick="confirmCheckout()">
-        </form>
-
-        <script>
-            function confirmRemove() {
-                return confirm("Are you sure you want to clear your cart?");
-            }
-
-            function confirmCheckout() {
-                return confirm("Are you sure you want to checkout?");
-            }
-        </script>
 
         <hr>
         <p>Created by Amber Chen, Mabel Hong, and Wendy Tu | Sponsored by Nelson</p>
