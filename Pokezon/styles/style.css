@@ -3,6 +3,11 @@
     src: url(/Pokezon/Pokemon-Solid.ttf);
 }
 
+@font-face {
+    font-family: header;
+    src: url(Pokezon/Rubik-VariableFont_wght.ttf);
+}
+
 #center {
     display: block;
     margin-left: auto;
@@ -21,7 +26,9 @@ body {
 }
 
 h2 {
-
+    font-family: header;
+    text-align: center;
+    font-size: 6rem;
 }
 
 #grey {
@@ -29,8 +36,7 @@ h2 {
     border-color: palevioletred;
     border-width: 0.5em;
     border-style: outset;
-    padding-left: 2rem;
-    padding-bottom: 2rem;
+    padding:10rem;
 }
 
 #nav-bar {
@@ -52,7 +58,10 @@ h2 {
     background-color: rgb(240, 82, 106);
 }
 
-
+#index-subheading {
+    font-size: 2rem;
+    text-align: center;
+}
 
 #nav-bar-background {
     background-color: lightpink;
