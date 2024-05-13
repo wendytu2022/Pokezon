@@ -21,13 +21,14 @@ h1 {
     margin: 2rem;
 }
 
-h2 {
-    font-size: 4rem;
-    text-align: center;
-}
-
 body {
     background-image: url('background.png');
+}
+
+#welcome {
+    font-family: header;
+    font-size: 4rem;
+    text-align: center;
 }
 
 #grey {
