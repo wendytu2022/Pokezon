@@ -36,7 +36,7 @@ app.post("/searchResults", async (request, response) => {
         const pokemonData = await apiResponse.json();
         let properties;
 
-        pokemonData.abilities.forEach(p => {properties += p.name + "\n"})
+        pokemonData.abilities.forEach(p => {properties += p.ability.name + "\n"})
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
