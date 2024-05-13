@@ -189,6 +189,63 @@ app.post("/clear", async (request, response) => {
 
 });
 
+// continue shopping
+app.post("/shop", async (request, response) => {
+    response.redirect("/");
+});
+
+// checkout
+app.post("/checkout", async (request, response) => {
+
+    try {
+        await client.connect();
+
+        // gets list of pokemon
+        const result = await client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .find()
+            .toArray();
+
+        let items = result.map(pokemon => {
+            return `<tr><td>${pokemon.name}</td><td><img src=${pokemon.image} alt=${pokemon.name}></td></tr>`;
+        }).join('');
+
+        let cart = `<table border="1">
+                        <thead>
+                            <tr>
+                                <th>Pokemon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>${items}</tr>
+                        </tbody>
+                    </table>
+                    <br>`;
+
+
+        const variables = {
+            html: cart
+        };
+
+        // clears cart
+        const cursor = await client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .find()
+            .toArray();
+        const count = cursor.length;
+
+        await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).deleteMany({});
+
+        response.render("checkout", variables);
+
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+
+});
+
 app.listen(portNumber);
 console.log(`Web server started and running at: http://localhost:${portNumber}`);
 const prompt = "Stop to shutdown the server: ";
