@@ -44,16 +44,8 @@ app.post("/searchResults", async (request, response) => {
         console.log(pokemonData.abilities)
 
         properties = "<span>"
-<<<<<<< Updated upstream
         pokemonData.abilities.forEach(p => {if (p.ability.name) {
             properties += "<span id = \"ability\">" + p.ability.name + "</span>"}})
-=======
-        pokemonData.abilities.forEach(p => {
-            if (p.ability.name) {
-                properties += "<div id = \"ability\">" + p.ability.name + "<div>"
-            }
-        })
->>>>>>> Stashed changes
         properties += "</span>"
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
