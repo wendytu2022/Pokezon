@@ -2,8 +2,8 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
-const portNumber = process.env.PORT;
-//const portNumber = 4000;
+//const portNumber = process.env.PORT;
+const portNumber = 4000;
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -27,7 +27,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 app.post("/searchResults", async (request, response) => {
 
-    let pokemonName  = request.body.pokemonName;
+    let pokemonName = request.body.pokemonName;
     let shiny = request.body.color;
     pokemonName = pokemonName.toLowerCase();
     let pokemon;
@@ -38,7 +38,7 @@ app.post("/searchResults", async (request, response) => {
         const pokemonData = await apiResponse.json();
         let properties;
 
-        pokemonData.abilities.forEach(p => {properties += p.name + "\n"})
+        pokemonData.abilities.forEach(p => { properties += p.name + "\n" })
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
@@ -78,7 +78,7 @@ app.get("/cart", async (request, response) => {
             .toArray();
 
         let items = result.map(pokemon => {
-            return `<tr><td>${pokemon.name}</td><td>${pokemon.weight}</td></tr>`;
+            return `<tr><td>${pokemon.name}</td><td>${pokemon.price}</td><td></td></tr>`;
         }).join('');
 
         let cart = `<table border="1">
@@ -110,22 +110,22 @@ app.get("/cart", async (request, response) => {
 /* add to cart */
 app.post("/cart", async (request, response) => {
 
-    let pokemonName  = request.body.pokemonName;
-    pokemonName = pokemonName.toLowerCase();
+    let pokemonName = request.body.pokemonName;
+    let image = request.body.image;
+    let price = request.body.price;
 
     try {
-
-        const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
-        const pokemonData = await apiResponse.json();
+        await client.connect();
 
         let pokemon = {
-            name: pokemonData.name,
-            image: pokemonData.sprites.front_default,
-            price: pokemonData.weight,
-            properties: pokemonData.abilities[0].ability
-        }
-
-        response.render("searchResults", pokemon);
+            name: pokemonName,
+            image: image,
+            price: price
+        }        
+        
+        await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(pokemon);
+        
+        response.redirect("cart")
 
     } catch (e) {
         console.error(e);
