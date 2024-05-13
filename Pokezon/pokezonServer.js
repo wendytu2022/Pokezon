@@ -181,6 +181,11 @@ app.post("/clear", async (request, response) => {
 
 });
 
+// continue shopping
+app.post("/shop", async (request, response) => {
+    response.redirect("/");
+});
+
 // checkout
 app.post("/checkout", async (request, response) => {
 
