@@ -34,13 +34,16 @@ app.post("/searchResults", async (request, response) => {
 
         const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
         const pokemonData = await apiResponse.json();
+        let properties;
+
+        pokemonData.abilities.forEach(p => {properties += p.name + "\n"})
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_shiny,
                 price: pokemonData.weight * 2,
-                properties: pokemonData.abilities[0].ability
+                properties: pokemonData.abilities[0].ability.name
             }
         }
         else {
