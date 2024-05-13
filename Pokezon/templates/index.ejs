@@ -13,8 +13,8 @@
         <h1>Pokezon</h1>
         <ul id="nav-bar">
             <li class="nav-bar-element"><a href="/">Home</a></li>
-            <li class="nav-bar-element"><a href="history">History</a></li>
-            <li class="nav-bar-element"><a href="cart">Cart</a></li>
+            <li class="nav-bar-element"><a href="/history">History</a></li>
+            <li class="nav-bar-element"><a href="/cart">Cart</a></li>
         </ul>
     </div>
     
@@ -23,7 +23,7 @@
     <h2>Welcome to Pokezon!</h2>
 
     <h3 id="index-subheading">Search for your next Pokemon: </h3><br>
-    <form action="/results" method="post">
+    <form action="/searchResults" method="post">
         <input type="text" id="pokemonSearchBar" name="pokemonName" value="Pikachu">
         <input type="submit" id="submitButton" name="submitButton" value="Search"><br>
         <input type="radio" id="normal" value="normal" name="color" checked> <label for="normal">Normal</label>

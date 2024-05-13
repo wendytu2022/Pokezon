@@ -23,7 +23,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const databaseAndCollection = { db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION };
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-app.post("/results", async (request, response) => {
+app.post("/searchResults", async (request, response) => {
 
     let pokemonName  = request.body.pokemonName;
     let shiny = request.body.color;
