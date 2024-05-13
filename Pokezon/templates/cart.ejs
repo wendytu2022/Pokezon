@@ -28,9 +28,21 @@
             <input type="submit" value="Clear cart" onclick="confirmRemove()">
         </form>
 
+        <form action="/shop" method="post">
+            <input type="submit" value="Continue shopping">
+        </form>
+
+        <form action="/checkout" method="post">
+            <input type="submit" value="Checkout" onclick="confirmCheckout()">
+        </form>
+
         <script>
-            function confirmRemove(){
+            function confirmRemove() {
                 return confirm("Are you sure you want to clear your cart?");
+            }
+
+            function confirmCheckout() {
+                return confirm("Are you sure you want to checkout?");
             }
         </script>
 
