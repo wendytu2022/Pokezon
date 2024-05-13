@@ -21,6 +21,7 @@ body {
 }
 
 #grey {
+    margin: 1rem;
     background-color: rgba(255, 255, 255, 0.7);
     border-color: palevioletred;
     border-width: 0.5em;
@@ -52,6 +53,9 @@ body {
 
 #nav-bar-background {
     background-color: lightpink;
+    margin: 1rem;
+    border: 0.3rem solid palevioletred;
+    border-radius: 2rem;
 }
 
 #pokemonSearchBar {
@@ -73,10 +77,30 @@ input[type="submit"]:hover {
     border: 0.3rem solid rgb(61, 176, 214);
 }
 
-#ability {
+#pink {
     background-color: lightpink;
     border: 0.3rem solid palevioletred;
     border-radius: 2rem;
     padding: 0.5rem;
     margin: 0.5rem;
+}
+
+table, th, td {
+    border: 1px solid palevioletred;
+}
+
+table {
+    border-width: 0.5rem;
+    border-color: palevioletred;
+    border-style: groove;
+}
+
+th {
+    background-color: palevioletred;
+    border-color: palevioletred;
+}
+
+td {
+    background-color: lightpink;
+    border-color: palevioletred;
 }

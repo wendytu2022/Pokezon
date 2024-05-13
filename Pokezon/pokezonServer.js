@@ -39,26 +39,34 @@ app.post("/searchResults", async (request, response) => {
 
         const apiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
         const pokemonData = await apiResponse.json();
-        let properties;
+        let properties, items;
 
         properties = ""
         pokemonData.abilities.forEach(p => {if (p.ability.name) {
-            properties += `<span id = "ability">${p.ability.name}</span>`}})
+            properties += `<span id = "pink">${p.ability.name.replace('-', ' ')}</span>`}})
+
+        items = ""
+        pokemonData.held_items.forEach(p => {if (p.item.name) {
+            items += `<span id = "pink">${p.item.name.replace('-', ' ')}</span>`}})
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_shiny,
+                imageBack: pokemonData.sprites.back_shiny,
                 price: pokemonData.weight * 2,
-                properties: properties.replace('-', ' ')
+                properties: properties,
+                items: items
             }
         }
         else {
             pokemon = {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_default,
+                imageBack: pokemonData.sprites.back_default,
                 price: pokemonData.weight,
-                properties: properties.replace('-', ' ')
+                properties: properties,
+                items: items
             }
         }
 
@@ -91,7 +99,7 @@ app.get("/cart", async (request, response) => {
             return sum + parseInt(pokemon.price);
         }, 0);
 
-        let cart = `<table border="1">
+        let cart = `<table>
                         <thead>
                             <tr>
                                 <th>Item</th><th>Price</th><th></th>
