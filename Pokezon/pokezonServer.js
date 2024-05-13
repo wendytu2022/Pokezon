@@ -5,6 +5,9 @@ const app = express();
 //const portNumber = process.env.PORT;
 const portNumber = 4000;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
 const uri = process.env.MONGO_CONNECTION_STRING;
@@ -12,7 +15,7 @@ const uri = process.env.MONGO_CONNECTION_STRING;
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/styles'));
 
 /* INDEX PAGE */
 app.get("/", (request, response) => {
@@ -38,7 +41,8 @@ app.post("/searchResults", async (request, response) => {
         const pokemonData = await apiResponse.json();
         let properties;
 
-        pokemonData.abilities.forEach(p => { properties += p.name + "\n" })
+        console.log(pokemonData.abilities)
+        properties = types[0].type.name
 
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
