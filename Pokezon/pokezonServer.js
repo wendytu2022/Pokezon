@@ -5,9 +5,6 @@ const app = express();
 //const portNumber = process.env.PORT;
 const portNumber = 4000;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
 const uri = process.env.MONGO_CONNECTION_STRING;
