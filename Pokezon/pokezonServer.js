@@ -12,7 +12,7 @@ const uri = process.env.MONGO_CONNECTION_STRING;
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/styles'));
 
 /* INDEX PAGE */
 app.get("/", (request, response) => {

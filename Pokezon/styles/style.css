@@ -1,6 +1,6 @@
 @font-face {
     font-family: pokemon;
-    src: url(Pokemon-Solid.ttf);
+    src: url(/Pokezon/Pokemon-Solid.ttf);
 }
 
 #center {
@@ -17,7 +17,7 @@ h1 {
 }
 
 body {
-    background-image: url('background.png');
+    background-image: url('/Pokezon/background.png');
 }
 
 h2 {
