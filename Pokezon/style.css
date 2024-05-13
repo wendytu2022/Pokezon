@@ -1,0 +1,85 @@
+@font-face {
+    font-family: pokemon;
+    src: url(Pokemon-Solid.ttf);
+}
+
+#center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+h1 {
+    font-family: pokemon;
+    display: inline;
+    margin: 2rem;
+}
+
+body {
+    background-image: url('background.png');
+}
+
+h2 {
+
+}
+
+#grey {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: palevioletred;
+    border-width: 0.5em;
+    border-style: outset;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+}
+
+#nav-bar {
+    list-style-type: none;
+    margin-left: 5rem;
+    padding: 5rem;
+    display: inline;
+}
+
+.nav-bar-element {
+    display: inline;
+    padding: 1rem;
+    background-color: lightpink;
+}
+
+.nav-bar-element:hover {
+    display: inline;
+    padding: 1rem;
+    background-color: rgb(240, 82, 106);
+}
+
+
+
+#nav-bar-background {
+    background-color: lightpink;
+}
+
+#pokemonSearchBar {
+    margin-left: 30%;
+    padding: 0.5rem;
+    border-radius: 25rem;
+    border: 0.3rem solid lightblue;
+}
+
+#submitButton {
+    background-color: lightblue;
+    border: 0.3rem solid lightblue;
+    border-radius: 2rem;
+    padding: 0.5rem;
+}
+
+#submitButton:hover {
+    background-color: rgb(61, 176, 214);
+    border: 0.3rem solid rgb(61, 176, 214);
+}
+
+#ability {
+    background-color: lightpink;
+    border: 0.3rem solid palevioletred;
+    border-radius: 2rem;
+    padding: 0.5rem;
+}

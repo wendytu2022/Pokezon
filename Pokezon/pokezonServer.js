@@ -5,6 +5,12 @@ const app = express();
 //const portNumber = process.env.PORT;
 const portNumber = 4000;
 
+<<<<<<< HEAD
+=======
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
+
+>>>>>>> 148ed47adc7e3e4f71e7fd81b22cc6efad57ed3a
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
 const uri = process.env.MONGO_CONNECTION_STRING;
@@ -39,13 +45,18 @@ app.post("/searchResults", async (request, response) => {
         let properties;
 
         console.log(pokemonData.abilities)
-        properties = pokemonData.abilities[0].ability.name
+
+        properties = "<span>"
+        pokemonData.abilities.forEach(p => {if (p.ability.name) {
+            properties += "<div id = \"ability\">" + p.ability.name + "<div>"}})
+        properties += "</span>"
+
         if (shiny === "shiny" && pokemonData.sprites.front_shiny != "null") {
             pokemon = {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_shiny,
                 price: pokemonData.weight * 2,
-                properties: properties
+                properties: properties.replace('-', ' ')
             }
         }
         else {
@@ -53,7 +64,7 @@ app.post("/searchResults", async (request, response) => {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_default,
                 price: pokemonData.weight,
-                properties: properties
+                properties: properties.replace('-', ' ')
             }
         }
 
@@ -78,18 +89,28 @@ app.get("/cart", async (request, response) => {
             .toArray();
 
         let items = result.map(pokemon => {
-            return `<tr><td>${pokemon.name}</td><td>${pokemon.price}</td><td></td></tr>`;
+            return `<tr><td>${pokemon.name}</td><td>${pokemon.price}</td><td><img src=${pokemon.image} alt=${pokemon.name}></td></tr>`;
         }).join('');
+
+        let total = result.reduce((sum, pokemon) => {
+            return sum + parseInt(pokemon.price);
+        }, 0);
 
         let cart = `<table border="1">
                         <thead>
                             <tr>
-                                <th>Item</th><th>Price</th>
+                                <th>Item</th><th>Price</th><th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>${items}</tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total Cost: </td>
+                                <td>${total.toFixed(2)}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                     <br>`;
 
@@ -132,6 +153,31 @@ app.post("/cart", async (request, response) => {
     } finally {
         await client.close();
     }
+});
+
+app.post("/clear", async (request, response) => {
+
+    try {
+        await client.connect();
+
+        const cursor = await client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .find()
+            .toArray();
+        const count = cursor.length;
+
+        const result = await client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .deleteMany({});
+
+        response.redirect("cart");
+
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+
 });
 
 app.listen(portNumber);

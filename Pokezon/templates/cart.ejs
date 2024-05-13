@@ -25,6 +25,16 @@
             <%- html %>
         </div>
 
+        <form action="/clear" method="post">
+            <input type="submit" value="Clear cart" onclick="confirmRemove()">
+        </form>
+
+        <script>
+            function confirmRemove(){
+                return confirm("Are you sure you want to clear your cart?");
+            }
+        </script>
+
         <hr>
         <p>Created by Amber Chen, Mabel Hong, and Wendy Tu | Sponsored by Nelson</p>
     </div>
