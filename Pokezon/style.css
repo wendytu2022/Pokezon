@@ -17,7 +17,7 @@ h1 {
 }
 
 body {
-    background-image: url('/Pokezon/styles/background.png');
+    background-image: url('background.png');
 }
 
 #grey {
@@ -73,7 +73,7 @@ body {
     border: 0.3rem solid rgb(61, 176, 214);
 }
 
-#ability {
+.ability {
     background-color: lightpink;
     border: 0.3rem solid palevioletred;
     border-radius: 2rem;
