@@ -38,6 +38,7 @@ body {
     border-width: 0.5em;
     border-style: outset;
     padding: 10rem;
+    padding-bottom: 2rem;
 }
 
 #greyResults {
