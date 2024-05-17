@@ -14,6 +14,9 @@
     margin-right: auto;
 }
 
+body {
+    font-family: header;
+}
 
 h1 {
     font-family: pokemon;
@@ -73,6 +76,7 @@ body {
 
 #nav-bar-background {
     background-color: lightpink;
+    padding: 0.5rem;
     margin: 1rem;
     border: 0.3rem solid palevioletred;
     border-radius: 2rem;
@@ -86,6 +90,7 @@ body {
 }
 
 input[type="submit"] {
+    font-family: header;
     background-color: lightblue;
     border: 0.3rem solid lightblue;
     border-radius: 2rem;
@@ -123,4 +128,9 @@ th {
 td {
     background-color: lightpink;
     border-color: palevioletred;
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
 }
