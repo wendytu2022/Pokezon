@@ -23,18 +23,22 @@
         <div>
             <%- html %>
         </div>
+        
+        <div class="button-container">
 
-        <form action="/clear" method="post">
-            <input type="submit" value="Clear cart" onclick="return confirmRemove()">
-        </form>
+            <form action="/clear" method="post">
+                <input type="submit" value="Clear cart" onclick="return confirmRemove()">
+            </form>
 
-        <form action="/shop" method="post">
-            <input type="submit" value="Continue shopping">
-        </form>
+            <form action="/shop" method="post">
+                <input type="submit" value="Continue shopping">
+            </form>
 
-        <form action="/checkout" method="post">
-            <input type="submit" value="Checkout" onclick="return confirmCheckout()">
-        </form>
+            <form action="/checkout" method="post">
+                <input type="submit" value="Checkout" onclick="return confirmCheckout()">
+            </form>
+            
+        </div>
         
 
         <script>

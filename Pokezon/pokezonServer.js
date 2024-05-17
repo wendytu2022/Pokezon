@@ -2,11 +2,8 @@ process.stdin.setEncoding("utf8");
 const path = require("path");
 const express = require("express");
 const app = express();
-//const portNumber = process.env.PORT;
-const portNumber = 4000;
-
-//const __filename = fileURLToPath(import.meta.url);
-//const __dirname = path.dirname(__filename);
+const portNumber = process.env.PORT;
+//const portNumber = 4000;
 
 /* mongo stuff */
 require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
@@ -102,7 +99,7 @@ app.get("/cart", async (request, response) => {
         let cart = `<table>
                         <thead>
                             <tr>
-                                <th>Item</th><th>Price</th><th></th>
+                                <th>Item</th><th>Price</th>
                             </tr>
                         </thead>
                         <tbody>

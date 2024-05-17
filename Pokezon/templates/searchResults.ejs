@@ -27,15 +27,17 @@
             <h3><%- name %></h3>
             <img src="<%- image %>" alt="<%- name%>"><img src="<%- imageBack %>" alt="<%- name%>">
             <h3>Price: $<%- price %></h3>
-            <form action="/cart" method="post">
-                <input type="hidden" name="pokemonName" value="<%- name %>">
-                <input type="hidden" name="image" value="<%- image %>">
-                <input type="hidden" name="price" value="<%- price %>">
-                <input type="submit" value="Add to Cart" id="submitButton" name="submitButton"/>
-            </form>
-            <form action="/back" method="post">
-                <input type="submit" value="Back"/>
-            </form>
+            <div class="button-container">
+                <form action="/cart" method="post">
+                    <input type="hidden" name="pokemonName" value="<%- name %>">
+                    <input type="hidden" name="image" value="<%- image %>">
+                    <input type="hidden" name="price" value="<%- price %>">
+                    <input type="submit" value="Add to Cart" id="submitButton" name="submitButton"/>
+                </form>
+                <form action="/back" method="post">
+                    <input type="submit" value="Back"/>
+                </form>
+            </div>
 
             <h3>Product Details</h3>
             <%- items %>
