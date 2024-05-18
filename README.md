@@ -6,4 +6,4 @@
 **App Link:** https://pokezon-obre.onrender.com/ \
 **YouTube Video Link:** https://www.youtube.com/watch?v=oRwxGhKBVHQ \
 **APIs:** PokeAPI (https://pokeapi.co/) \
-**Contact Email:** 
+**Contact Email:** wtu1@terpmail.umd.edu
