@@ -72,7 +72,9 @@ body {
     background-color: rgb(240, 82, 106);
 }
 
-
+.link {
+    text-decoration: none;
+}
 
 #nav-bar-background {
     background-color: lightpink;
